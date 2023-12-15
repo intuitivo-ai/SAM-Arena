@@ -1,6 +1,6 @@
 ---
 title: SAM Arena
-emoji: 🐢
+emoji: ⚔️
 colorFrom: red
 colorTo: green
 sdk: gradio
