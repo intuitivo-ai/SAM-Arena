@@ -1,0 +1,10 @@
+torch
+torchvision
+
+pillow
+gradio==3.44.0
+transformers
+supervision
+ultralytics
+clip
+opencv-python
