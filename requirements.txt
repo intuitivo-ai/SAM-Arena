@@ -8,3 +8,4 @@ ultralytics
 clip
 opencv-python
 scikit-image
+streamlit-drawable-canvas
