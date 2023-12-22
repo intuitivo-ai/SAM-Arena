@@ -1,4 +1,5 @@
-#https://huggingface.co/spaces/SkalskiP/EfficientSAM
+# code kudos https://huggingface.co/spaces/SkalskiP/EfficientSAM
+# fastSAM ultralytics
 from typing import Tuple
 
 import cv2
@@ -122,3 +123,17 @@ def draw_FastSAM_point(detections):
             output_image = apply_masks_and_draw(image, masks, random_color=True, retinamask=False, original_h=original_h, original_w=original_w)
         cv2.imwrite('output.png', output_image)
         return cv2.cvtColor(output_image, cv2.COLOR_BGR2RGB)
+    
+def draw_EdgeSAM_point(image, masks):
+    # convert BGR to RGB numpy image
+    image = image[..., ::-1]  # Convert BGR to RGB
+    # shapes
+    original_h, original_w = image.shape[:2]
+
+    if masks is not None:
+        if isinstance(masks[0], torch.Tensor):
+            masks = np.array(masks.cpu())
+
+        output_image = apply_masks_and_draw(image, masks, random_color=True, retinamask=False, original_h=original_h, original_w=original_w)
+    cv2.imwrite('output.png', output_image)
+    return cv2.cvtColor(output_image, cv2.COLOR_BGR2RGB)

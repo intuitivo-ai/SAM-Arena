@@ -6,8 +6,8 @@ import pandas as pd
 import numpy as np
 import torch
 
-from utils.SAM import SAM_points_inference, FastSAM_points_inference, EfficientSAM_points_inference
-from utils.draw import draw_SAM_mask_point, draw_FastSAM_point
+from utils.SAM import SAM_points_inference, FastSAM_points_inference, EfficientSAM_points_inference, EdgeSAM_points_inference
+from utils.draw import draw_SAM_mask_point, draw_FastSAM_point, draw_EdgeSAM_point
 from utils.tools import pil_to_bytes
 
 def click(container_width,height,scale,radius_width,show_mask,im):
@@ -32,7 +32,6 @@ def click(container_width,height,scale,radius_width,show_mask,im):
         if rerun:
             st.rerun()
     elif canvas_result.json_data is not None:
-        color_change_point = st.button('Save color')
         df = pd.json_normalize(canvas_result.json_data["objects"])
         if len(df) == 0:
             st.session_state.clear()
@@ -60,19 +59,29 @@ def click(container_width,height,scale,radius_width,show_mask,im):
             else:
                 input_labels.append(0)
         
-        # SAM inference
-        SAM_masks = SAM_points_inference(im, [input_points])
-        st.image(draw_SAM_mask_point(im, SAM_masks, input_points[0][0], input_points[0][1]))
-        st.success('SAM Inference completed!', icon="✅")
+        col1, col2 = st.columns(2)
         
-        # EfficientSAM inference
-        EfficientSAM_masks = EfficientSAM_points_inference(im, input_points)
-        st.image(draw_SAM_mask_point(im, EfficientSAM_masks, input_points[0][0], input_points[0][1]))
-        st.success('EfficientSAM Inference completed!', icon="✅")
-        # FastSAM inference
-        FastSAM_masks = FastSAM_points_inference(im, input_points, input_labels)
-        st.image(draw_FastSAM_point(FastSAM_masks))
-        st.success('FastSAM Inference completed!', icon="✅")
+        with col1:
+            # SAM inference
+            SAM_masks = SAM_points_inference(im, [input_points])
+            st.image(draw_SAM_mask_point(im, SAM_masks, input_points[0][0], input_points[0][1]))
+            st.success('SAM Inference completed!', icon="✅")
+            
+            # EfficientSAM inference
+            EfficientSAM_masks = EfficientSAM_points_inference(im, input_points)
+            st.image(draw_SAM_mask_point(im, EfficientSAM_masks, input_points[0][0], input_points[0][1]))
+            st.success('EfficientSAM Inference completed!', icon="✅")
+        
+        with col2:
+            # FastSAM inference
+            FastSAM_masks = FastSAM_points_inference(im, input_points, input_labels)
+            st.image(draw_FastSAM_point(FastSAM_masks))
+            st.success('FastSAM Inference completed!', icon="✅")
+        
+            # EdgeSAM inference
+            EdgeSAM_masks = EdgeSAM_points_inference(im, input_points, [1])
+            st.image(draw_EdgeSAM_point(im, EdgeSAM_masks))
+            st.success('EdgeSAM Inference completed!', icon="✅")
         
         
 def main():
