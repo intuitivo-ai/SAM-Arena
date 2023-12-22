@@ -5,9 +5,14 @@ import matplotlib.pyplot as plt
 import cv2
 import torch
 import os
+import io
 import sys
 import clip
 
+def pil_to_bytes(pil_image):
+    buffer = io.BytesIO()
+    pil_image.save(buffer, format="PNG")  # or other format like "JPEG"
+    return buffer.getvalue()
 
 def convert_box_xywh_to_xyxy(box):
     if len(box) == 4:

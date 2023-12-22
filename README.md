@@ -3,8 +3,8 @@ title: SAM Arena
 emoji: ⚔️
 colorFrom: red
 colorTo: green
-sdk: gradio
-sdk_version: 4.9.0
+sdk: streamlit
+sdk_version: 1.25.0
 app_file: app.py
 pinned: false
 ---

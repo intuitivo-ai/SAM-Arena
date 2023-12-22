@@ -1,2 +1,12 @@
 efficient_sam_s_gpu.jit filter=lfs diff=lfs merge=lfs -text
 efficient_sam_s_cpu.jit filter=lfs diff=lfs merge=lfs -text
+weights/edge_sam_3x_encoder.mlpackage.zip filter=lfs diff=lfs merge=lfs -text
+weights/edge_sam_decoder.mlpackage.zip filter=lfs diff=lfs merge=lfs -text
+weights/edge_sam_3x_encoder.onnx filter=lfs diff=lfs merge=lfs -text
+weights/edge_sam_encoder.onnx filter=lfs diff=lfs merge=lfs -text
+weights/edge_sam.pth filter=lfs diff=lfs merge=lfs -text
+weights/edge_sam_3x.pth filter=lfs diff=lfs merge=lfs -text
+weights/edge_sam_3x_decoder.mlpackage.zip filter=lfs diff=lfs merge=lfs -text
+weights/edge_sam_encoder.mlpackage.zip filter=lfs diff=lfs merge=lfs -text
+weights/edge_sam_3x_decoder.onnx filter=lfs diff=lfs merge=lfs -text
+weights/edge_sam_decoder.onnx filter=lfs diff=lfs merge=lfs -text
